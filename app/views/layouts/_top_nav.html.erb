@@ -27,6 +27,12 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+      <% if current_user %>
+        <li style="padding-top: 15px;padding-bottom: 15px;color: #777;line-height: 20px;position: relative;display: block;">Hello <%= current_user.email %></li><li><%= link_to "Logout", session_path(current_user.id), method: :delete, data: { confirm: 'Are you sure to logout?' } %></li>
+      <% else %>
+        <li><%= link_to 'Login', new_session_path %></li><li><%= link_to 'Register', new_user_path %></li>
+      <% end %>
+
        <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 

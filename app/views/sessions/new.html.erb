@@ -1,0 +1,25 @@
+<section class="login-new">
+
+  <header class="page-header">
+    <h1>Login &raquo; Existing User</h1>
+  </header>
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-1">
+      <%= form_tag sessions_path do |f|  %>
+
+        <div class="form-group">
+        <%= label_tag :email %>
+          <%= text_field_tag :email, nil, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+         <%= label_tag :password %>
+          <%= password_field_tag :password, nil, class: 'form-control' %>
+        </div>
+
+        <%= submit_tag 'Login', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+
+</section>
