@@ -1,6 +1,8 @@
+
 <section class="orders-show">
 
   <header class="page-header">
+  <h1>Thank you for your order <%= @order.email %>! </h1>
     <h1>Order #<%= @order.id %></h1>
   </header>
 
@@ -17,7 +19,7 @@
       </thead>
       <tbody>
         <% @order.line_items.each do |line_item| %>
-          <%= render 'item', product_id: line_item.product_id, quantity: line_item.quantity %>
+          <%= render 'email', product_id: line_item.product_id, quantity: line_item.quantity %>
         <% end %>
       </tbody>
       <tfoot>
@@ -39,7 +41,5 @@
     </table>
   </div>
   </div>
-
-  <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
 
 </section>

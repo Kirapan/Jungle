@@ -22,6 +22,9 @@ Rails.application.routes.draw do
     resources :categories, only: [:index, :create, :new, :destroy]
   end
 
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
   
 
   # The priority is based upon order of creation: first created -> highest priority.

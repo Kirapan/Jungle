@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20180426005927) do
     t.string   "stripe_charge_id"
     t.string   "email"
   end
-
+  
   create_table "products", force: :cascade do |t|
     t.string   "name"
     t.text     "description"

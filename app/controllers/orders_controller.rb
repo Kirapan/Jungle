@@ -54,6 +54,7 @@ class OrdersController < ApplicationController
       end
     end
     order.save!
+    Mailer.order_email(order).deliver
     order
   end
 
