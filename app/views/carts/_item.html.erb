@@ -2,6 +2,7 @@
 
 <% if product = Product.find_by(id: product_id) %>
   <% item_total = product.price * quantity %>
+  <% @cart_quantity += quantity %>
   <% @cart_total += item_total %>
 
   <tr>

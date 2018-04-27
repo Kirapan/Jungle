@@ -3,7 +3,10 @@
   <header class="page-header">
     <h1>My Cart</h1>
   </header>
-
+  <% if cart.size == 0%>
+  <h3>You don't have anything in the cart.</h3>
+  <%= link_to 'Go shopping', root_path, class: 'btn btn-lg btn-primary'%>
+  <% else%>
   <div class="panel panel-default items">
     <table class="table table-bordered">
       <thead>
@@ -16,6 +19,7 @@
       </thead>
       <tbody>
         <% @cart_total = 0 %>
+        <% @cart_quantity = 0%>
         <% cart.each do |product_id, details| %>
           <%= render 'item', product_id: product_id, details: details %>
         <% end %>
@@ -41,13 +45,20 @@
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
           data-amount="<%= @cart_total * 100 %>"
           data-name="Jungle"
+          <% if current_user%>
           data-description="<%= current_user.first_name %> <%= current_user.last_name %>"
           data-locale="auto"
           data-email="<%= current_user.email %>"
+          <% else %>
+          data-description="anonymous user"
+          data-locale="auto"
+          data-email="no email"
+          <% end %>
           data-currency="cad">
         </script>
       <% end %>
     </div>
   </div>
+  <% end %>
 
 </section>
