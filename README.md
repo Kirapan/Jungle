@@ -23,11 +23,11 @@ More information in their docs: <https://stripe.com/docs/testing#cards>
 
 ## Screenshots
 
-!["Screenshot of landing page]()
-!["Screenshot of product page]()
-!["Screenshot of login page]()
-!["Screenshot of registration page]()
-!["Screenshot of order page]()
-!["Screenshot of cart page]()
-!["Screenshot of admin_category page]()
-!["Screenshot of email_management page]()
+!["Screenshot of landing page](https://github.com/Kirapan/Jungle/blob/master/doc/landing_page.png)
+!["Screenshot of product page](https://github.com/Kirapan/Jungle/blob/master/doc/product.png)
+!["Screenshot of login page](https://github.com/Kirapan/Jungle/blob/master/doc/login_page.png)
+!["Screenshot of registration page](https://github.com/Kirapan/Jungle/blob/master/doc/registration_page.png)
+!["Screenshot of order page](https://github.com/Kirapan/Jungle/blob/master/doc/order_summary.png)
+!["Screenshot of cart page](https://github.com/Kirapan/Jungle/blob/master/doc/cart_page.png)
+!["Screenshot of admin_category page](https://github.com/Kirapan/Jungle/blob/master/doc/admin_category.png)
+!["Screenshot of email_management page](https://github.com/Kirapan/Jungle/blob/master/doc/email_review.png)
