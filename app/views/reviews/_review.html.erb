@@ -1,0 +1,22 @@
+
+
+<% user = User.find("#{review.user_id}") %>
+
+<div class="col-sm-8">
+        <dl class="dl-horizontal">
+          <dt>User</dt>
+          <dd><%= user.first_name %></dd>
+          <dt> Review </dt>
+          <dd><%= review.description %></dd>
+          <dt>Rating</dt>
+          <dd><%= review.rating%></dd>
+          <dt>Created at</dt>
+          <dd><%= review.created_at %></dd>
+          <% if current_user &&  current_user.id == user.id%>
+            <dd><%= link_to "Delete Review", [review.product, review], method: :delete, class: "btn btn-primary" %></dd>
+          <% end %>
+        </dl>
+        <hr/>
+        
+      </div>
+  

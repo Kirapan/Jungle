@@ -29,13 +29,14 @@ cat1 = Category.find_or_create_by! name: 'Apparel'
 cat2 = Category.find_or_create_by! name: 'Electronics'
 cat3 = Category.find_or_create_by! name: 'Furniture'
 
+
 ## PRODUCTS
 
 puts "Re-creating Products ..."
 
 Product.destroy_all
 
-cat1.products.create!({
+@p1 = cat1.products.create!({
   name:  'Men\'s Classy shirt',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('apparel1.jpg'),
@@ -43,7 +44,7 @@ cat1.products.create!({
   price: 64.99
 })
 
-cat1.products.create!({
+@p2 = cat1.products.create!({
   name:  'Women\'s Zebra pants',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('apparel2.jpg'),
@@ -132,5 +133,36 @@ cat3.products.create!({
   price: 2_483.75
 })
 
+puts "Creating Comments ..."
+
+@p1.reviews.create!({
+  user_id: 1,
+  description: 'This is awesome!',
+  rating: 5
+})
+
+@p1.reviews.create!({
+  user_id: 2,
+  description: 'I don\'t like it',
+  rating: 2
+})
+
+@p1.reviews.create!({
+  user_id: 3,
+  description: 'Fair',
+  rating: 3
+})
+
+@p2.reviews.create!({
+  user_id: 1,
+  description: 'Worst decsion ever',
+  rating: 1
+})
+
+@p2.reviews.create!({
+  user_id: 2,
+  description: 'My boyfriend loves it!',
+  rating: 5
+})
 
 puts "DONE!"
