@@ -12,16 +12,16 @@ class Admin::ProductsController < Admin::BaseController
     @product = Product.new(product_params)
 
     if @product.save
-      redirect_to [:admin, :products], notice: 'Product created!'
+      redirect_to [:admin, :products], success: 'Product created!'
     else
-      render :new
+      redirect_to new_admin_product_path, danger: 'All fields are mandatory!'
     end
   end
 
   def destroy
     @product = Product.find params[:id]
     @product.destroy
-    redirect_to admin_products_path, notice: 'Product deleted!'
+    redirect_to admin_products_path, success: 'Product deleted!'
   end
 
   private

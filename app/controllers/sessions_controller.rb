@@ -6,15 +6,15 @@ class SessionsController < ApplicationController
     @user = User.find_by_email(params[:email])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect_to [:products], notice: "Login successfully"
+      redirect_to [:products], success: "Login successfully"
     else
-      render 'new'
+      redirect_to new_session_path, danger: "wrong email or password"
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to products_path, notice: "Logout successfully"
+    redirect_to products_path, success: "Logout successfully"
   end
 
 end

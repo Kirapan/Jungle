@@ -35,6 +35,7 @@ gem 'carrierwave'
 gem 'rmagick'
 gem 'stripe'
 gem 'faker'
+gem "flash-message-conductor", "~> 2.0.1"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
