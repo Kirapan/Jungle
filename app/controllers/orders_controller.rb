@@ -1,23 +1,35 @@
 class OrdersController < ApplicationController
-  
-  
+
   def show
     @order = Order.find(params[:id])
   end
 
   def create
-    charge = perform_stripe_charge
-    order  = create_order(charge)
-
-    if order.valid?
-      empty_cart!
-      redirect_to order, success: 'Your Order has been placed.'
+    checkout_form = CheckoutForm.new(
+      email: params[:stripeEmail],
+      stripe_token: params[:stripeToken]
+    )
+    if checkout_form.valid?
+      begin
+        charge = PaymentGatewayService.new(
+          cart_total,
+          checkout_form.stripe_token
+        ).process_payment
+        order = Order.create_order_from_cart!(
+          cart_total: cart_total,
+          stripe_token: charge.id,
+          email: checkout_form.email,
+          products: cart
+        )
+        empty_cart!
+        redirect_to order, success: 'Your Order has been placed.'
+      rescue Stripe::CardError => e
+        redirect_to cart_path, flash: { error: e.message }
+      end
     else
-      redirect_to cart_path, flash: { error: order.errors.full_messages.first }
+      redirect_to cart_path, flash: { error: checkout_form.errors.full_messages.first }
     end
 
-  rescue Stripe::CardError => e
-    redirect_to cart_path, flash: { error: e.message }
   end
 
   private
@@ -25,37 +37,6 @@ class OrdersController < ApplicationController
   def empty_cart!
     # empty hash means no products in cart :)
     update_cart({})
-  end
-
-  def perform_stripe_charge
-    Stripe::Charge.create(
-      source:      params[:stripeToken],
-      amount:      cart_total, # in cents
-      description: "Khurram Virani's Jungle Order",
-      currency:    'cad'
-    )
-  end
-
-  def create_order(stripe_charge)
-    order = Order.new(
-      email: params[:stripeEmail],
-      total_cents: cart_total,
-      stripe_charge_id: stripe_charge.id, # returned by stripe
-    )
-    cart.each do |product_id, details|
-      if product = Product.find_by(id: product_id)
-        quantity = details['quantity'].to_i
-        order.line_items.new(
-          product: product,
-          quantity: quantity,
-          item_price: product.price,
-          total_price: product.price * quantity
-        )
-      end
-    end
-    order.save!
-    Mailer.order_email(order).deliver
-    order
   end
 
   # returns total in cents not dollars (stripe uses cents as well)

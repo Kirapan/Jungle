@@ -61,6 +61,9 @@ end
 
 group :test do
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'capybara'
+  gem 'poltergeist'
+  gem 'database_cleaner'
 end
 
 group :production do
@@ -68,4 +71,4 @@ group :production do
   gem 'rails_12factor'
 end
 
-gem 'puma'
+gem 'aws-sdk', '~> 2'
